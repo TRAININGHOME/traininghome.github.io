@@ -341,7 +341,7 @@ footer a:hover {
             transform: translateX(0);
         }
         100% {
-            transform: translateX(-500%); /* Ajustar la animación del carrusel para pantallas pequeñas */
+            transform: translateX(-200%); /* Ajustar la animación del carrusel para pantallas pequeñas */
         }
     }
 }
