@@ -1,0 +1,349 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #ffffff;
+    line-height: 1.6;
+    background-color: #000; /* Fondo negro */
+}
+
+/* Preloader */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000; /* Fondo negro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeOut 2s ease-out 2s forwards;
+}
+
+#preloader img {
+    width: 250px; /* Logotipo más grande */
+    animation: fadeIn 3s ease-in-out, fadeOut 3s ease-in-out 4s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* Contenedor centralizado */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #ffffff;
+}
+
+/* Encabezado */
+header {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 20px 0;
+}
+
+header.container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+header .logo h1 {
+    font-size: 3.5rem; /* Tamaño más grande para el nombre de la empresa */
+}
+
+
+header .company-name {
+    font-size: 3rem; /* Tamaño del nombre de la empresa */
+    font-family: 'Poppins', sans-serif; /* Tipografía innovadora */
+    color: #1e90ff; /* Color azul */
+    letter-spacing: 2px;
+    transition: transform 0.3s ease; /* Efecto dinámico */
+}
+
+header .company-name:hover {
+    transform: scale(1.1); /* Aumenta el tamaño al pasar el cursor */
+}
+
+nav {
+    flex: 1;
+    text-align: right; /* Alinea la lista a la derecha */
+}
+
+nav ul.nav-list {
+    list-style: none;
+    display: inline-flex; /* Coloca la lista horizontalmente */
+    align-items: center;
+    margin-right: 0; /* Sin margen derecho */
+}
+
+nav ul.nav-list li {
+    margin-left: 20px;
+}
+
+nav ul.nav-list li a {
+    color: #fff;
+    font-family: 'Poppins', sans-serif; /* Misma tipografía */
+    font-size: 1.4rem; /* Tamaño similar al nombre de la empresa */
+    text-decoration: none;
+    transition: color 0.3s ease; /* Transición de color */
+}
+
+nav ul.nav-list li a:hover {
+    color: #1e90ff; /* Cambia a azul al pasar el cursor */
+}
+
+/* Estilos Responsivos */
+@media (max-width: 768px) {
+    nav ul.nav-list {
+        align-items: center;
+    }
+
+    header .company-name {
+        font-size: 2.5rem;
+    }
+
+    nav ul.nav-list li a {
+        font-size: 1rem;
+    }
+}
+/* Sección principal (Hero) */
+.hero {
+    position: relative;
+    height: 40vh;
+    background-color: #000;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+h2 {
+    color: white;
+}
+.hero .overlay {
+    position: relative;
+    color-scheme: white;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.hero-content h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color:white;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    
+    color:white;
+}
+.home{
+    background-color: black;
+    color: white;
+}
+
+/* Sección "Sobre Nosotros" */
+.about {
+    background-color: #000000;
+    color: white;
+    padding: 50px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px black;
+    margin-top: -100px;
+    text-align: center;
+}
+
+.about h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.about p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+
+/* Sección de Servicios */
+.services {
+    padding: 30px 0;
+    text-align: center;
+}
+
+.services h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: white;
+}
+
+/* Contenedor de los servicios */
+.services-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Cajas de servicio en pantallas grandes */
+.service {
+    background-color: #000000;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: calc(22.222% - 10px); /* Para que en pantallas grandes se muestren varias por fila */
+    transition: transform 0.3s ease;
+    font-size: 1rem;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    background-color: #1e90ff;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+/* Estilo de las imágenes dentro de las cajas de servicio */
+.service img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Título de cada servicio */
+.service h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: white;
+}
+
+/* Texto dentro de cada servicio */
+.service p {
+    font-size: 1rem;
+}
+
+/* Efecto hover */
+.service:hover {
+    transform: translateY(-10px);
+}
+
+/* Ajustes para pantallas pequeñas (Móviles) */
+@media (max-width: 768px) {
+    .service {
+        width: 100%; /* Las cajas de servicio ocuparán el 100% del ancho en móviles */
+        margin-bottom: 20px; /* Espacio entre las cajas de servicios en móviles */
+    }
+
+    .service h3 {
+        font-size: 1.6rem; /* Ajustar el tamaño del título en pantallas pequeñas */
+    }
+
+    .service p {
+        font-size: 0.9rem; /* Ajustar el tamaño del texto en pantallas pequeñas */
+    }
+
+    .service img {
+        width: 100%; /* Asegura que las imágenes se ajusten al ancho completo en móviles */
+    }
+}
+
+
+/* Llamada a la Acción */
+.cta {
+    background-color: #000000;
+    color: #fff;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.cta-button {
+    background-color: #ffffff;
+    color: #333;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #1e90ff;
+}
+
+/* Pie de Página */
+footer {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer p {
+    margin-bottom: 5px;
+}
+
+footer a {
+    color: #00c3dd;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+.carousel {
+    width: 100%; /* Limitar el ancho del carrusel */
+    overflow: hidden; /* Ocultar cualquier desbordamiento */
+    margin: 10px 0;
+}
+
+.carousel-track {
+    display: flex;
+    width: 100%; /* Asegura que el track del carrusel no exceda el 100% de la pantalla */
+    animation: scroll 20s linear infinite;
+}
+
+
+/* Para pantallas pequeñas */
+@media (max-width: 768px) {
+    
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-500%); /* Ajustar la animación del carrusel para pantallas pequeñas */
+        }
+    }
+}
+* {
+    box-sizing: border-box; /* Asegura que los márgenes y padding no excedan el ancho */
+}
