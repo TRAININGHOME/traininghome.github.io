@@ -332,18 +332,47 @@ footer a:hover {
 }
 
 
-/* Para pantallas pequeñas */
+/* Ajustes para el carrusel en pantallas pequeñas (Móviles) */
 @media (max-width: 768px) {
-    
-    @keyframes scroll {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(-500%); /* Ajustar la animación del carrusel para pantallas pequeñas */
-        }
+    .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        width: 100%;
+        animation: scroll 15s infinite linear; /* Desplazamiento automático */
+    }
+
+    .service {
+        min-width: 100%; /* Cada servicio ocupa el 100% del ancho de la pantalla */
+        box-sizing: border-box;
     }
 }
-* {
-    box-sizing: border-box; /* Asegura que los márgenes y padding no excedan el ancho */
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    20% {
+        transform: translateX(0); /* Se mantiene el primer servicio un tiempo */
+    }
+    25% {
+        transform: translateX(-100%); /* Desplazamiento al siguiente servicio */
+    }
+    45% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateX(-200%); /* Desplazamiento al siguiente servicio */
+    }
+    70% {
+        transform: translateX(-200%);
+    }
+    75% {
+        transform: translateX(-300%); /* Desplazamiento al siguiente servicio */
+    }
+    95% {
+        transform: translateX(-300%);
+    }
+    100% {
+        transform: translateX(0); /* Vuelve al inicio */
+    }
 }
