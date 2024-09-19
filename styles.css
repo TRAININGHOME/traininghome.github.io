@@ -258,7 +258,7 @@ h2 {
 }
 
 /* Ajustes para pantallas pequeñas (Móviles) */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .service {
         width: 100%; /* Las cajas de servicio ocuparán el 100% del ancho en móviles */
         margin-bottom: 20px; /* Espacio entre las cajas de servicios en móviles */
@@ -321,14 +321,14 @@ footer a:hover {
     text-decoration: underline;
 }
 .carousel {
-    width: 100%; /* Limitar el ancho del carrusel */
+    width: 100px; /* Limitar el ancho del carrusel */
     overflow: hidden; /* Ocultar cualquier desbordamiento */
     margin: 10px 0;
 }
 
 .carousel-track {
     display: flex;
-    width: 200px; /* Asegura que el track del carrusel no exceda el 100% de la pantalla */
+    width: 100%; /* Asegura que el track del carrusel no exceda el 100% de la pantalla */
     animation: scroll 20s linear infinite;
 }
 
@@ -341,7 +341,7 @@ footer a:hover {
             transform: translateX(0);
         }
         100% {
-            transform: translateX(-200%); /* Ajustar la animación del carrusel para pantallas pequeñas */
+            transform: translateX(-100%); /* Ajustar la animación del carrusel para pantallas pequeñas */
         }
     }
 }
