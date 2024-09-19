@@ -328,20 +328,20 @@ footer a:hover {
 
 .carousel-track {
     display: flex;
-    width: 100%; /* Asegura que el track del carrusel no exceda el 100% de la pantalla */
+    width: 200px; /* Asegura que el track del carrusel no exceda el 100% de la pantalla */
     animation: scroll 20s linear infinite;
 }
 
 
 /* Para pantallas pequeñas */
-@media (max-width: 500px) {
+@media (max-width: 200px) {
     
     @keyframes scroll {
         0% {
             transform: translateX(0);
         }
         100% {
-            transform: translateX(-400%); /* Ajustar la animación del carrusel para pantallas pequeñas */
+            transform: translateX(-200%); /* Ajustar la animación del carrusel para pantallas pequeñas */
         }
     }
 }
