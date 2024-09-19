@@ -1,5 +1,3 @@
-// script.js
-
 // Al finalizar la animación, se oculta el preloader y se muestra el contenido
 window.addEventListener('load', () => {
     const preloader = document.getElementById('preloader');
