@@ -331,27 +331,19 @@ footer a:hover {
     animation: scroll 20s linear infinite;
 }
 
-/* Ajustes para el carrusel en pantallas pequeñas (Móviles) */
-@media (max-width: 768px) {
-    .carousel-track {
-        display: flex;
-        transition: none; /* No queremos saltos entre elementos */
-        width: calc(100% * 10); /* Duplicamos el ancho para permitir el ciclo continuo */
-        animation: scroll 10000000s linear infinite; /* Animación más lenta y continua */
-    }
 
-    .service {
-        min-width: 100%; /* Cada servicio ocupa el 100% del ancho de la pantalla */
-        box-sizing: border-box;
+/* Para pantallas pequeñas */
+@media (max-width: 768px) {
+    
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-500%); /* Ajustar la animación del carrusel para pantallas pequeñas */
+        }
     }
 }
-
-/* Animación de desplazamiento continuo */
-@keyframes scroll {
-    0% {
-        transform: translateX(0); /* Comienza desde el primer servicio */
-    }
-    100% {
-        transform: translateX(-100%); /* Desplazamiento completo a la mitad del track */
-    }
+* {
+    box-sizing: border-box; /* Asegura que los márgenes y padding no excedan el ancho */
 }
