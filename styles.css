@@ -334,14 +334,14 @@ footer a:hover {
 
 
 /* Para pantallas pequeñas */
-@media (max-width: 768px) {
+@media (max-width: 500px) {
     
     @keyframes scroll {
         0% {
             transform: translateX(0);
         }
         100% {
-            transform: translateX(-200%); /* Ajustar la animación del carrusel para pantallas pequeñas */
+            transform: translateX(-400%); /* Ajustar la animación del carrusel para pantallas pequeñas */
         }
     }
 }
