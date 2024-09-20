@@ -237,6 +237,11 @@ h2 {
     border: 1px solid #ddd;
     border-radius: 10px;
     margin: 0 10px; /* Espacio entre servicios */
+     /* Centrando el contenido del servicio */
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
 }
 
 
@@ -271,14 +276,7 @@ h2 {
     .service p {
         font-size: 0.9rem; /* Ajustar el tamaño del texto en pantallas pequeñas */
     }
-    @keyframes scroll {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(-500%); /* Ajustar la animación del carrusel para pantallas pequeñas */
-        }
-    }
+    
 }
 /* Contenedor del carrusel que estará debajo del título */
 .carousel-container {
@@ -290,6 +288,11 @@ h2 {
     align-items: center;
     overflow: hidden; /* Solo se verá un servicio a la vez */
     margin-top: 20px; /* Espacio respecto al título */
+    /* Centrar en la pantalla */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .carousel {
@@ -301,7 +304,7 @@ h2 {
     overflow: hidden; /* Solo muestra un servicio */
     width: 100%; /* Limitar el ancho del carrusel */
     overflow: hidden; /* Ocultar cualquier desbordamiento */
-    margin: 14px 0;
+    margin: 10px 0;
 }
 
 
