@@ -225,11 +225,18 @@ h2 {
     transition: transform 0.3s ease;
     font-size: 1rem;
     padding: 20px;
-    margin: 10px;
     text-align: center;
     background-color: #00c3dd;
     color: #fff;
     box-sizing: border-box;
+    min-width: 100%; /* Cada servicio ocupa todo el contenedor */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin: 0 10px; /* Espacio entre servicios */
 }
 
 
@@ -264,8 +271,48 @@ h2 {
     .service p {
         font-size: 0.9rem; /* Ajustar el tamaño del texto en pantallas pequeñas */
     }
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-500%); /* Ajustar la animación del carrusel para pantallas pequeñas */
+        }
+    }
+}
+/* Contenedor del carrusel que estará debajo del título */
+.carousel-container {
+    width: 100%; /* Ocupa el ancho de la página */
+    height: 300px; /* Ajusta el alto según el diseño */
+    background-color: #00c3dd; /* Fondo para diferenciar la caja */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Solo se verá un servicio a la vez */
+    margin-top: 20px; /* Espacio respecto al título */
 }
 
+.carousel {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Solo muestra un servicio */
+    width: 100%; /* Limitar el ancho del carrusel */
+    overflow: hidden; /* Ocultar cualquier desbordamiento */
+    margin: 10px 0;
+}
+
+
+.carousel-track {
+    display: flex;
+    width: calc(100% * 10); /* Amplitud para incluir servicios duplicados */
+    animation: scroll 60s linear infinite; /* Animación cíclica continua */
+    display: flex;
+    width: 70%; /* Asegura que el track del carrusel no exceda el 100% de la pantalla */
+    animation: scroll 20s linear infinite;
+}
 
 /* Llamada a la Acción */
 .cta {
@@ -309,30 +356,12 @@ footer a {
 footer a:hover {
     text-decoration: underline;
 }
-.carousel {
-    width: 100%; /* Limitar el ancho del carrusel */
-    overflow: hidden; /* Ocultar cualquier desbordamiento */
-    margin: 10px 0;
-}
-
-.carousel-track {
-    display: flex;
-    width: 70%; /* Asegura que el track del carrusel no exceda el 100% de la pantalla */
-    animation: scroll 20s linear infinite;
-}
 
 
 /* Para pantallas pequeñas */
 @media (max-width: 768px) {
     
-    @keyframes scroll {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(-500%); /* Ajustar la animación del carrusel para pantallas pequeñas */
-        }
-    }
+    
 }
 * {
     box-sizing: border-box; /* Asegura que los márgenes y padding no excedan el ancho */
