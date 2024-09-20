@@ -301,7 +301,7 @@ h2 {
     overflow: hidden; /* Solo muestra un servicio */
     width: 100%; /* Limitar el ancho del carrusel */
     overflow: hidden; /* Ocultar cualquier desbordamiento */
-    margin: 10px 0;
+    margin: 14px 0;
 }
 
 
