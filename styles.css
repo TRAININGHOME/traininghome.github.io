@@ -83,7 +83,7 @@ header .logo h1 {
 header .company-name {
     font-size: 3rem; /* Tamaño del nombre de la empresa */
     font-family: 'Poppins', sans-serif; /* Tipografía innovadora */
-    color: #1e90ff; /* Color azul */
+    color: #00c3dd; /* Color azul */
     letter-spacing: 2px;
     transition: transform 0.3s ease; /* Efecto dinámico */
 }
@@ -117,7 +117,7 @@ nav ul.nav-list li a {
 }
 
 nav ul.nav-list li a:hover {
-    color: #1e90ff; /* Cambia a azul al pasar el cursor */
+    color: #00c3dd; /* Cambia a azul al pasar el cursor */
 }
 
 /* Estilos Responsivos */
@@ -227,18 +227,11 @@ h2 {
     padding: 20px;
     margin: 10px;
     text-align: center;
-    background-color: #1e90ff;
+    background-color: #00c3dd;
     color: #fff;
     box-sizing: border-box;
 }
 
-/* Estilo de las imágenes dentro de las cajas de servicio */
-.service img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
 
 /* Título de cada servicio */
 .service h3 {
@@ -271,10 +264,6 @@ h2 {
     .service p {
         font-size: 0.9rem; /* Ajustar el tamaño del texto en pantallas pequeñas */
     }
-
-    .service img {
-        width: 100%; /* Asegura que las imágenes se ajusten al ancho completo en móviles */
-    }
 }
 
 
@@ -297,7 +286,7 @@ h2 {
 }
 
 .cta-button:hover {
-    background-color: #1e90ff;
+    background-color: #00c3dd;
 }
 
 /* Pie de Página */
