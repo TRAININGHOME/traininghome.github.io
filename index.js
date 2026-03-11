@@ -13,7 +13,7 @@ const pool = new Pool({
 });
 
 app.get('/', (req, res) => {
-  res.send('¡Backend de Mantra funcionando! 🚀');
+  res.send(' Prueba de backend correcto');
 });
 
 // Ruta para probar la base de datos
@@ -28,4 +28,5 @@ app.get('/db-test', async (req, res) => {
 
 app.listen(port, () => {
   console.log(`Servidor corriendo en puerto ${port}`);
+
 });
