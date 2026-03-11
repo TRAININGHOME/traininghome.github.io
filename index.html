@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MANTRA - Proyecto Base de Datos</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e1e2f 0%, #2a2a40 100%);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            text-align: center;
+            max-width: 600px;
+        }
+        h1 { color: #00d2ff; margin-bottom: 10px; }
+        h2 { font-weight: 300; font-size: 1.2rem; color: #ccc; }
+        .info { margin: 30px 0; text-align: left; line-height: 1.6; }
+        .btn-container { display: flex; gap: 10px; justify-content: center; }
+        .btn {
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-primary { background: #00d2ff; color: #1e1e2f; }
+        .btn-secondary { border: 1px solid #00d2ff; color: #00d2ff; }
+        .btn:hover { opacity: 0.8; transform: translateY(-2px); }
+        .status { margin-top: 20px; font-size: 0.9rem; color: #00ff88; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MANTRA</h1>
+        <h2>Gestión de Eventos - Práctica 3.1</h2>
+        <hr style="opacity: 0.2;">
+        
+        <div class="info">
+            <p><strong>Escuela:</strong> ESCOM - IPN</p>
+            <p><strong>Materia:</strong> Bases de Datos</p>
+            <p><strong>Tecnologías:</strong> Node.js, PostgreSQL (Neon Tech), Render.</p>
+            <p><strong>Descripción:</strong> Aplicación web dinámica con arquitectura híbrida para la gestión de eventos y calificaciones en tiempo real.</p>
+        </div>
+
+        <div class="btn-container">
+            <a href="https://mantra-backend-escom.onrender.com" target="_blank" class="btn btn-primary">Ir a la App (Render)</a>
+            <a href="https://mantra-backend-escom.onrender.com/db-test" target="_blank" class="btn btn-secondary">Probar Base de Datos</a>
+        </div>
+
+        <p class="status">● Sistema Operativo y Conectado</p>
+    </div>
+</body>
+</html>
