@@ -3,64 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MANTRA - Proyecto Base de Datos</title>
+    <title>MANTRA - Prototipo Uno | ESCOM IPN</title>
     <style>
+        /* Estilos Globales y Reset */
+        :root {
+            --primary: #00d2ff; /* Celeste Neón */
+            --secondary: #2a2a40; /* Fondo Tarjetas */
+            --background: #1e1e2f; /* Fondo Principal */
+            --text: #ffffff;
+            --text-muted: #8b9bb4;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e1e2f 0%, #2a2a40 100%);
-            color: white;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; transition: 0.3s; }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section (Cabecera Principal) */
+        .hero {
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            border: 1px solid rgba(255, 255, 255, 0.18);
             text-align: center;
-            max-width: 600px;
+            background: linear-gradient(135deg, rgba(30,30,47,0.8) 0%, rgba(42,42,64,0.6) 100%), 
+                        url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1600') no-repeat center center/cover;
+            position: relative;
         }
-        h1 { color: #00d2ff; margin-bottom: 10px; }
-        h2 { font-weight: 300; font-size: 1.2rem; color: #ccc; }
-        .info { margin: 30px 0; text-align: left; line-height: 1.6; }
-        .btn-container { display: flex; gap: 10px; justify-content: center; }
+
+        .hero-content {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 50px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .prototype-tag {
+            display: inline-block;
+            background-color: var(--primary);
+            color: #1e1e2f;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin: 0 0 10px 0;
+            background: linear-gradient(to right, #00d2ff, #3a7bd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            margin: 0 0 30px 0;
+        }
+
+        /* Botones */
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
         .btn {
-            text-decoration: none;
-            padding: 12px 20px;
+            padding: 12px 30px;
             border-radius: 8px;
             font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #1e1e2f;
+        }
+
+        .btn-secondary {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+            transform: translateY(-3px);
+        }
+
+        /* Sección de Información Técnica */
+        .tech-info {
+            padding: 100px 0;
+            background-color: var(--secondary);
+            margin-top: -50px;
+            border-radius: 50px 50px 0 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .tech-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
             transition: 0.3s;
         }
-        .btn-primary { background: #00d2ff; color: #1e1e2f; }
-        .btn-secondary { border: 1px solid #00d2ff; color: #00d2ff; }
-        .btn:hover { opacity: 0.8; transform: translateY(-2px); }
-        .status { margin-top: 20px; font-size: 0.9rem; color: #00ff88; }
+
+        .tech-card:hover {
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .tech-card h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .tech-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Footer (Pie de Página) */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>MANTRA</h1>
-        <h2>Gestión de Eventos - Práctica 3.1</h2>
-        <hr style="opacity: 0.2;">
-        
-        <div class="info">
-            <p><strong>Escuela:</strong> ESCOM - IPN</p>
-            <p><strong>Materia:</strong> Bases de Datos</p>
-            <p><strong>Tecnologías:</strong> Node.js, PostgreSQL (Neon Tech), Render.</p>
-            <p><strong>Descripción:</strong> Aplicación web dinámica con arquitectura híbrida para la gestión de eventos y calificaciones en tiempo real.</p>
-        </div>
 
-        <div class="btn-container">
-            <a href="https://mantra-backend-escom.onrender.com" target="_blank" class="btn btn-primary">Ir a la App (Render)</a>
-            <a href="https://mantra-backend-escom.onrender.com/db-test" target="_blank" class="btn btn-secondary">Probar Base de Datos</a>
+    <header class="hero">
+        <div class="hero-content">
+            <span class="prototype-tag">PROTOTIPO UNO</span>
+            <h1>MANTRA</h1>
+            <h2>La plataforma de eventos de la ESCOM. Redefiniendo la experiencia estudiantil.</h2>
+            
+            <div class="btn-group">
+                <a href="https://mantra-backend-escom.onrender.com" target="_blank" class="btn btn-primary">Ir a la App Dinámica</a>
+                <a href="https://mantra-backend-escom.onrender.com/db-test" target="_blank" class="btn btn-secondary">Probar Conexión DB</a>
+            </div>
         </div>
+    </header>
 
-        <p class="status">● Sistema Operativo y Conectado</p>
-    </div>
+    <section class="tech-info">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--text);">Ficha Técnica del Prototipo</h2>
+            <p style="text-align: center; color: var(--text-muted);">Esta versión estática demuestra la arquitectura de MANTRA, consumiendo datos en tiempo real de una API dinámica.</p>
+            
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h3>Frontend Estático</h3>
+                    <p><strong>Plataforma:</strong> GitHub Pages</p>
+                    <p><strong>Tecnologías:</strong> HTML5, CSS3 (Glassmorphism), JavaScript (Fetch API).</p>
+                    <p>Esta es la interfaz de usuario que presenta el proyecto y se conecta al backend dinámico.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <h3>Backend Dinámico</h3>
+                    <p><strong>Plataforma:</strong> Render</p>
+                    <p><strong>Tecnologías:</strong> Node.js, Express, Cors.</p>
+                    <p>Una API RESTful que procesa las peticiones y gestiona la lógica de conexión a la base de datos.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <h3>Base de Datos</h3>
+                    <p><strong>Plataforma:</strong> Neon Tech</p>
+                    <p><strong>Tecnologías:</strong> PostgreSQL Serverless.</p>
+                    <p>Almacenamiento persistente y estructurado para usuarios, eventos y calificaciones.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>MANTRA | Práctica 3.1: "Alojamiento Gratuito" | ESCOM - IPN | Bases de Datos</p>
+            <p>&copy; 2026 Prototipo de Desarrollo</p>
+        </div>
+    </footer>
+
 </body>
 </html>
