@@ -23,13 +23,12 @@
             overflow-x: hidden;
         }
 
-        /* Animación de entrada */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Navbar Profesional */
+        /* Navbar */
         nav {
             padding: 20px 50px;
             display: flex;
@@ -45,7 +44,7 @@
 
         .logo { font-size: 1.8rem; font-weight: 800; letter-spacing: 2px; color: var(--primary); }
 
-        /* Hero Section Profesional */
+        /* Hero Section */
         .hero {
             height: 100vh;
             display: flex;
@@ -80,7 +79,7 @@
 
         p.subtitle { font-size: 1.3rem; color: var(--text-dim); margin: 25px 0 40px; }
 
-        /* Botones de Doble Perfil */
+        /* Botones Principales */
         .cta-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
 
         .btn-main {
@@ -92,20 +91,25 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
         }
 
         .organizer { background: var(--primary); color: #000; }
-        .guest { border: 2px solid var(--primary); color: var(--primary); }
+        .guest { border: 2px solid var(--primary); color: var(--primary); background: transparent; }
 
         .btn-main:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(0, 210, 255, 0.3); }
 
-        /* Sección de Sedes */
+        /* Sedes Preview */
         .sedes-preview { padding: 100px 0; text-align: center; }
         .grid-sedes {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .sede-card {
@@ -115,7 +119,59 @@
             border-radius: 20px;
             transition: 0.3s;
         }
-        .sede-card:hover { background: rgba(255,255,255,0.08); border-color: var(--primary); }
+        .sede-card h3 { color: var(--primary); margin-bottom: 5px; }
+        .sede-card p { font-size: 0.9rem; color: var(--text-dim); }
+
+        /* Modales / Formularios */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none; 
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(15px);
+        }
+
+        .form-card {
+            background: #16161a;
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            width: 90%;
+            max-width: 450px;
+            animation: fadeInUp 0.4s ease;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .form-card h2 { color: var(--primary); margin: 0 0 10px 0; }
+        .form-card p { color: var(--text-dim); margin-bottom: 25px; font-size: 0.9rem; }
+
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; margin-bottom: 8px; font-size: 0.85rem; color: var(--primary); }
+        
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .close-btn {
+            margin-top: 20px;
+            color: var(--text-dim);
+            cursor: pointer;
+            display: block;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+        .close-btn:hover { color: var(--primary); }
+
     </style>
 </head>
 <body>
@@ -123,7 +179,7 @@
     <nav>
         <div class="logo">MANTRA</div>
         <div class="cta-group">
-            <a href="#" style="color: white; text-decoration: none; font-weight: 500;">Iniciar Sesión</a>
+            <a href="#" style="color: white; text-decoration: none; font-weight: 500; font-size: 0.9rem;">Iniciar Sesión</a>
         </div>
     </nav>
 
@@ -134,12 +190,12 @@
             <p class="subtitle">La plataforma exclusiva de Hugo Isac para conectar organizadores de élite con los recintos más vibrantes de la capital.</p>
             
             <div class="cta-group">
-                <a href="#register-organizer" class="btn-main organizer">
+                <button onclick="openOrganizador()" class="btn-main organizer">
                     <i class="fas fa-calendar-plus"></i> Soy Organizador
-                </a>
-                <a href="#register-guest" class="btn-main guest">
+                </button>
+                <button onclick="openBuscar()" class="btn-main guest">
                     <i class="fas fa-ticket-alt"></i> Buscar Eventos
-                </a>
+                </button>
             </div>
         </div>
     </header>
@@ -155,157 +211,94 @@
         </div>
     </section>
 
+    <div id="modal-organizador" class="modal-overlay">
+        <div class="form-card">
+            <h2>Panel de Organizador</h2>
+            <p>Registra tu evento en una de las sedes de Hugo Isac.</p>
+            
+            <div class="input-group">
+                <label>Nombre del Evento</label>
+                <input type="text" placeholder="Ej. Festival de Jazz Verano">
+            </div>
+
+            <div class="input-group">
+                <label>Sede Solicitada</label>
+                <select>
+                    <option>Sede Roma (Cap. 300)</option>
+                    <option>Sede Condesa (Cap. 500)</option>
+                    <option>Sede Polanco (Cap. 250)</option>
+                    <option>Sede Centro (Cap. 800)</option>
+                    <option>Sede Juárez (Cap. 400)</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Fecha del Evento</label>
+                <input type="date">
+            </div>
+
+            <button class="btn-main organizer" style="width: 100%;">
+                Solicitar Reserva de Sede
+            </button>
+            
+            <span class="close-btn" onclick="closeModals()">← Volver al inicio</span>
+        </div>
+    </div>
+
+    <div id="modal-buscar" class="modal-overlay">
+        <div class="form-card">
+            <h2>Explorar Experiencias</h2>
+            <p>Encuentra los mejores eventos en las sedes MANTRA.</p>
+            
+            <div class="input-group">
+                <label>¿Qué buscas hoy?</label>
+                <input type="text" placeholder="Música, Arte, Gastronomía...">
+            </div>
+
+            <div class="input-group">
+                <label>Filtrar por Zona (Sede)</label>
+                <select>
+                    <option>Todas las sedes</option>
+                    <option>Roma / Condesa</option>
+                    <option>Polanco</option>
+                    <option>Centro Histórico</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Rango de Edad</label>
+                <select>
+                    <option>Para toda la familia</option>
+                    <option>Mayores de 18 años</option>
+                </select>
+            </div>
+
+            <button class="btn-main guest" style="width: 100%;">
+                Ver Cartelera Disponible
+            </button>
+            
+            <span class="close-btn" onclick="closeModals()">← Volver al inicio</span>
+        </div>
+    </div>
+
+    <script>
+        function openOrganizador() { 
+            document.getElementById('modal-organizador').style.display = 'flex'; 
+        }
+        function openBuscar() { 
+            document.getElementById('modal-buscar').style.display = 'flex'; 
+        }
+        function closeModals() {
+            document.getElementById('modal-organizador').style.display = 'none';
+            document.getElementById('modal-buscar').style.display = 'none';
+        }
+
+        // Cerrar al hacer clic fuera del cuadro blanco
+        window.onclick = function(event) {
+            if (event.target.className === 'modal-overlay') {
+                closeModals();
+            }
+        }
+    </script>
 </body>
-    <style>
-    /* Estilos para los Formularios (Modales) */
-    .modal-overlay {
-        position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        display: none; /* Se activa con JS */
-        justify-content: center;
-        align-items: center;
-        z-index: 2000;
-        backdrop-filter: blur(15px);
-    }
-
-    .form-card {
-        background: rgba(255, 255, 255, 0.05);
-        padding: 40px;
-        border-radius: 24px;
-        border: 1px solid rgba(0, 210, 255, 0.3);
-        width: 100%;
-        max-width: 450px;
-        animation: fadeInUp 0.5s ease;
-    }
-
-    .form-card h2 {
-        color: var(--primary);
-        margin-bottom: 10px;
-    }
-
-    .form-card p {
-        color: var(--text-dim);
-        margin-bottom: 25px;
-        font-size: 0.9rem;
-    }
-
-    .input-group {
-        margin-bottom: 20px;
-        text-align: left;
-    }
-
-    .input-group label {
-        display: block;
-        margin-bottom: 8px;
-        font-size: 0.85rem;
-        color: var(--primary);
-    }
-
-    .input-group input, .input-group select, .input-group textarea {
-        width: 100%;
-        padding: 12px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
-        color: white;
-        outline: none;
-        box-sizing: border-box;
-    }
-
-    .input-group input:focus {
-        border-color: var(--primary);
-    }
-
-    .close-btn {
-        margin-top: 15px;
-        color: var(--text-dim);
-        cursor: pointer;
-        display: block;
-        font-size: 0.8rem;
-    }
-</style>
-
-<div id="modal-organizador" class="modal-overlay">
-    <div class="form-card">
-        <h2>Panel de Organizador</h2>
-        <p>Registra tu evento en una de las sedes de Hugo Isac.</p>
-        
-        <div class="input-group">
-            <label>Nombre del Evento</label>
-            <input type="text" placeholder="Ej. Festival de Jazz Verano">
-        </div>
-
-        <div class="input-group">
-            <label>Sede Solicitada</label>
-            <select>
-                <option>Sede Roma (Cap. 300)</option>
-                <option>Sede Condesa (Cap. 500)</option>
-                <option>Sede Polanco (Cap. 250)</option>
-                <option>Sede Centro (Cap. 800)</option>
-                <option>Sede Juárez (Cap. 400)</option>
-            </select>
-        </div>
-
-        <div class="input-group">
-            <label>Fecha del Evento</label>
-            <input type="date">
-        </div>
-
-        <button class="btn-main organizer" style="width: 100%; border:none; cursor:pointer;">
-            Solicitar Reserva de Sede
-        </button>
-        
-        <span class="close-btn" onclick="closeModals()">← Volver al inicio</span>
-    </div>
-</div>
-
-<div id="modal-buscar" class="modal-overlay">
-    <div class="form-card">
-        <h2>Explorar Experiencias</h2>
-        <p>Encuentra los mejores eventos en las sedes MANTRA.</p>
-        
-        <div class="input-group">
-            <label>¿Qué buscas hoy?</label>
-            <input type="text" placeholder="Música, Arte, Gastronomía...">
-        </div>
-
-        <div class="input-group">
-            <label>Filtrar por Zona (Sede)</label>
-            <select>
-                <option>Todas las sedes</option>
-                <option>Roma / Condesa</option>
-                <option>Polanco</option>
-                <option>Centro Histórico</option>
-            </select>
-        </div>
-
-        <div class="input-group">
-            <label>Rango de Edad</label>
-            <select>
-                <option>Para toda la familia</option>
-                <option>Mayores de 18 años</option>
-            </select>
-        </div>
-
-        <button class="btn-main guest" style="width: 100%; border:none; background:transparent; cursor:pointer;">
-            Ver Cartelera Disponible
-        </button>
-        
-        <span class="close-btn" onclick="closeModals()">← Volver al inicio</span>
-    </div>
-</div>
-
-<script>
-    // Lógica sencilla para la exposición
-    function openOrganizador() { document.getElementById('modal-organizador').style.display = 'flex'; }
-    function openBuscar() { document.getElementById('modal-buscar').style.display = 'flex'; }
-    function closeModals() {
-        document.getElementById('modal-organizador').style.display = 'none';
-        document.getElementById('modal-buscar').style.display = 'none';
-    }
-
-    // Vincula tus botones principales con estas funciones
-    // Ejemplo: <a href="javascript:void(0)" onclick="openOrganizador()" class="btn-main organizer">...</a>
-</script>
 </html>
