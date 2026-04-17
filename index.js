@@ -1,32 +1,9 @@
-const express = require('express');
-const { Pool } = require('pg');
-const cors = require('cors');
-
-const app = express();
-app.use(cors());
-const port = process.env.PORT || 3000;
-
-// Aquí usamos la variable que configuraste en Render
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }
-});
-
+// Cambia el mensaje de bienvenida para que se vea profesional
 app.get('/', (req, res) => {
-  res.send(' Prueba de backend correcto');
-});
-
-// Ruta para probar la base de datos
-app.get('/db-test', async (req, res) => {
-  try {
-    const result = await pool.query('SELECT NOW()');
-    res.json({ message: 'Conexión exitosa', time: result.rows[0] });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-app.listen(port, () => {
-  console.log(`Servidor corriendo en puerto ${port}`);
-
+  res.json({
+    status: "Operacional",
+    system: "MANTRA Core Engine",
+    client: "Hugo Isac - Management System",
+    version: "2.0.4"
+  });
 });
