@@ -10,6 +10,8 @@
             --primary: #00d2ff; 
             --accent: #7000ff;
             --bg-dark: #0a0a0c;
+            --card-bg: #16161a; /* Fondo sólido para formularios */
+            --input-bg: #222228; /* Fondo de los campos de texto/select */
             --glass: rgba(255, 255, 255, 0.05);
             --text-main: #ffffff;
             --text-dim: #a0a0a0;
@@ -20,284 +22,232 @@
             background-color: var(--bg-dark);
             color: var(--text-main);
             margin: 0;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* --- PANTALLA DE CARGA --- */
+        #loader {
+            position: fixed;
+            width: 100%; height: 100vh;
+            background: #000;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease, visibility 1s;
         }
 
-        /* Navbar */
+        .loader-text {
+            font-size: 3.5rem; font-weight: 900; letter-spacing: 15px;
+            color: var(--primary);
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(0,210,255,0.5); opacity: 0.6; }
+            to { text-shadow: 0 0 30px rgba(0,210,255,1); opacity: 1; }
+        }
+
+        /* --- NAVBAR --- */
         nav {
             padding: 20px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            display: flex; justify-content: space-between; align-items: center;
             background: rgba(10, 10, 12, 0.8);
             backdrop-filter: blur(15px);
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            box-sizing: border-box;
+            position: fixed; width: 100%; z-index: 1000; box-sizing: border-box;
         }
 
-        .logo { font-size: 1.8rem; font-weight: 800; letter-spacing: 2px; color: var(--primary); }
+        .logo { font-size: 1.8rem; font-weight: 800; color: var(--primary); cursor: pointer; }
 
-        /* Hero Section */
+        /* --- HERO --- */
         .hero {
             height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             background: radial-gradient(circle at top right, rgba(0, 210, 255, 0.1), transparent),
                         radial-gradient(circle at bottom left, rgba(112, 0, 255, 0.1), transparent);
             text-align: center;
         }
 
-        .hero-inner {
-            max-width: 900px;
-            animation: fadeInUp 1s ease-out;
-            padding: 0 20px;
-        }
-
-        .badge {
-            background: var(--glass);
-            border: 1px solid var(--primary);
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--primary);
-            margin-bottom: 25px;
-            display: inline-block;
-        }
-
-        h1 { font-size: 4.5rem; margin: 0; line-height: 1.1; font-weight: 900; }
+        h1 { font-size: 4rem; margin: 0; font-weight: 900; }
         h1 span { color: var(--primary); }
+        p.subtitle { font-size: 1.2rem; color: var(--text-dim); margin: 25px 0 40px; }
 
-        p.subtitle { font-size: 1.3rem; color: var(--text-dim); margin: 25px 0 40px; }
-
-        /* Botones Principales */
-        .cta-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-
+        /* --- BOTONES --- */
         .btn-main {
-            padding: 18px 40px;
-            border-radius: 12px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: 0.4s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
+            padding: 16px 35px; border-radius: 12px; font-weight: 700;
+            transition: 0.4s; display: flex; align-items: center; gap: 10px;
+            cursor: pointer; border: none; font-family: inherit;
         }
-
         .organizer { background: var(--primary); color: #000; }
         .guest { border: 2px solid var(--primary); color: var(--primary); background: transparent; }
+        .btn-main:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 210, 255, 0.3); }
 
-        .btn-main:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(0, 210, 255, 0.3); }
-
-        /* Sedes Preview */
-        .sedes-preview { padding: 100px 0; text-align: center; }
-        .grid-sedes {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            padding: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .sede-card {
-            background: var(--glass);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 20px;
-            border-radius: 20px;
-            transition: 0.3s;
-        }
-        .sede-card h3 { color: var(--primary); margin-bottom: 5px; }
-        .sede-card p { font-size: 0.9rem; color: var(--text-dim); }
-
-        /* Modales / Formularios */
+        /* --- MODALES Y FORMULARIOS --- */
         .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            display: none; 
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            backdrop-filter: blur(15px);
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            display: none; justify-content: center; align-items: center;
+            z-index: 2000; backdrop-filter: blur(15px);
         }
 
         .form-card {
-            background: #16161a;
-            padding: 40px;
-            border-radius: 24px;
-            border: 1px solid rgba(0, 210, 255, 0.3);
-            width: 90%;
-            max-width: 450px;
-            animation: fadeInUp 0.4s ease;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            background: var(--card-bg);
+            padding: 40px; border-radius: 24px;
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            width: 90%; max-width: 400px; text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
         }
-
-        .form-card h2 { color: var(--primary); margin: 0 0 10px 0; }
-        .form-card p { color: var(--text-dim); margin-bottom: 25px; font-size: 0.9rem; }
 
         .input-group { margin-bottom: 20px; text-align: left; }
-        .input-group label { display: block; margin-bottom: 8px; font-size: 0.85rem; color: var(--primary); }
-        
-        .input-group input, .input-group select {
+        .input-group label { display: block; margin-bottom: 8px; font-size: 0.85rem; color: var(--primary); font-weight: 600; }
+
+        /* CORRECCIÓN DE COLOR EN INPUTS Y SELECTS */
+        .input-group input, 
+        .input-group select {
             width: 100%;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 14px;
+            background-color: var(--input-bg); /* Fondo oscuro para que resalte el texto */
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: white;
+            border-radius: 10px;
+            color: #ffffff; /* Texto siempre blanco */
+            font-size: 1rem;
             outline: none;
-            box-sizing: border-box;
+            transition: 0.3s;
+            appearance: none; /* Quita el estilo por defecto del sistema */
         }
 
-        .close-btn {
-            margin-top: 20px;
-            color: var(--text-dim);
-            cursor: pointer;
-            display: block;
-            font-size: 0.85rem;
-            text-align: center;
+        /* Estilo para las opciones dentro del select */
+        .input-group select option {
+            background-color: var(--card-bg);
+            color: white;
         }
-        .close-btn:hover { color: var(--primary); }
 
+        .input-group input:focus, .input-group select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.2);
+        }
+
+        .lock-notice {
+            background: rgba(255, 77, 77, 0.1);
+            color: #ff4d4d; padding: 12px; border-radius: 10px;
+            font-size: 0.85rem; margin-bottom: 20px; border: 1px solid rgba(255, 77, 77, 0.3);
+        }
+
+        .close-btn { margin-top: 25px; color: var(--text-dim); cursor: pointer; display: block; font-size: 0.9rem; }
+        .close-btn:hover { color: white; }
     </style>
 </head>
 <body>
 
+    <div id="loader">
+        <div class="loader-text">MANTRA</div>
+    </div>
+
     <nav>
         <div class="logo">MANTRA</div>
-        <div class="cta-group">
-            <a href="#" style="color: white; text-decoration: none; font-weight: 500; font-size: 0.9rem;">Iniciar Sesión</a>
-        </div>
+        <button onclick="openLogin()" class="btn-main guest" style="padding: 10px 20px; font-size: 0.8rem;">Iniciar Sesión</button>
     </nav>
 
     <header class="hero">
         <div class="hero-inner">
-            <div class="badge">Sistemas de Gestión de Sedes v2.0</div>
-            <h1>Control Total sobre tus <span>5 Sedes</span> en CDMX.</h1>
-            <p class="subtitle">La plataforma exclusiva de Hugo Isac para conectar organizadores de élite con los recintos más vibrantes de la capital.</p>
-            
+            <h1>Gestión de <span>Sedes</span> Premium.</h1>
+            <p class="subtitle">Infraestructura digital para los recintos de Hugo Isac.</p>
             <div class="cta-group">
-                <button onclick="openOrganizador()" class="btn-main organizer">
-                    <i class="fas fa-calendar-plus"></i> Soy Organizador
-                </button>
-                <button onclick="openBuscar()" class="btn-main guest">
-                    <i class="fas fa-ticket-alt"></i> Buscar Eventos
-                </button>
+                <button onclick="checkAccess('organizador')" class="btn-main organizer">Soy Organizador</button>
+                <button onclick="checkAccess('buscar')" class="btn-main guest">Buscar Eventos</button>
             </div>
         </div>
     </header>
 
-    <section class="sedes-preview">
-        <h2>Nuestros Recintos</h2>
-        <div class="grid-sedes">
-            <div class="sede-card"><h3>Sede Roma</h3><p>Capacidad: 300 personas</p></div>
-            <div class="sede-card"><h3>Sede Condesa</h3><p>Capacidad: 500 personas</p></div>
-            <div class="sede-card"><h3>Sede Polanco</h3><p>Capacidad: 250 personas</p></div>
-            <div class="sede-card"><h3>Sede Centro</h3><p>Capacidad: 800 personas</p></div>
-            <div class="sede-card"><h3>Sede Juárez</h3><p>Capacidad: 400 personas</p></div>
+    <div id="modal-login" class="modal-overlay">
+        <div class="form-card">
+            <h2>Acceso Seguro</h2>
+            <div class="input-group">
+                <label>Email Corporativo</label>
+                <input type="email" id="userEmail" placeholder="nombre@ejemplo.com">
+            </div>
+            <div class="input-group">
+                <label>Contraseña</label>
+                <input type="password" placeholder="••••••••">
+            </div>
+            <button class="btn-main organizer" style="width: 100%;" onclick="processLogin()">Entrar al Sistema</button>
+            <span class="close-btn" onclick="closeModals()">Cancelar</span>
         </div>
-    </section>
+    </div>
 
     <div id="modal-organizador" class="modal-overlay">
         <div class="form-card">
-            <h2>Panel de Organizador</h2>
-            <p>Registra tu evento en una de las sedes de Hugo Isac.</p>
-            
-            <div class="input-group">
-                <label>Nombre del Evento</label>
-                <input type="text" placeholder="Ej. Festival de Jazz Verano">
+            <div class="lock-notice" id="lock-org"><i class="fas fa-lock"></i> Autenticación requerida</div>
+            <h2>Reservar Sede</h2>
+            <div id="content-org" style="opacity: 0.2; pointer-events: none;">
+                <div class="input-group">
+                    <label>Nombre del Evento</label>
+                    <input type="text">
+                </div>
+                <div class="input-group">
+                    <label>Sede Disponible</label>
+                    <select>
+                        <option>Seleccionar sede...</option>
+                        <option>Sede Roma - CDMX</option>
+                        <option>Sede Condesa - CDMX</option>
+                        <option>Sede Polanco - CDMX</option>
+                    </select>
+                </div>
+                <button class="btn-main organizer" style="width: 100%;" onclick="window.location.href='organizador-success.html'">Enviar Solicitud</button>
             </div>
-
-            <div class="input-group">
-                <label>Sede Solicitada</label>
-                <select>
-                    <option>Sede Roma (Cap. 300)</option>
-                    <option>Sede Condesa (Cap. 500)</option>
-                    <option>Sede Polanco (Cap. 250)</option>
-                    <option>Sede Centro (Cap. 800)</option>
-                    <option>Sede Juárez (Cap. 400)</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label>Fecha del Evento</label>
-                <input type="date">
-            </div>
-
-            <button class="btn-main organizer" style="width: 100%;">
-                Solicitar Reserva de Sede
-            </button>
-            
-            <span class="close-btn" onclick="closeModals()">← Volver al inicio</span>
+            <span class="close-btn" onclick="closeModals()">← Volver</span>
         </div>
     </div>
 
     <div id="modal-buscar" class="modal-overlay">
         <div class="form-card">
-            <h2>Explorar Experiencias</h2>
-            <p>Encuentra los mejores eventos en las sedes MANTRA.</p>
-            
-            <div class="input-group">
-                <label>¿Qué buscas hoy?</label>
-                <input type="text" placeholder="Música, Arte, Gastronomía...">
+            <div class="lock-notice" id="lock-bus"><i class="fas fa-lock"></i> Autenticación requerida</div>
+            <h2>Cartelera Digital</h2>
+            <div id="content-bus" style="opacity: 0.2; pointer-events: none;">
+                <div class="input-group">
+                    <label>¿Qué evento buscas?</label>
+                    <input type="text" placeholder="Ej: Concierto Rock">
+                </div>
+                <button class="btn-main guest" style="width: 100%;" onclick="window.location.href='eventos.html'">Explorar</button>
             </div>
-
-            <div class="input-group">
-                <label>Filtrar por Zona (Sede)</label>
-                <select>
-                    <option>Todas las sedes</option>
-                    <option>Roma / Condesa</option>
-                    <option>Polanco</option>
-                    <option>Centro Histórico</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label>Rango de Edad</label>
-                <select>
-                    <option>Para toda la familia</option>
-                    <option>Mayores de 18 años</option>
-                </select>
-            </div>
-
-            <button class="btn-main guest" style="width: 100%;">
-                Ver Cartelera Disponible
-            </button>
-            
-            <span class="close-btn" onclick="closeModals()">← Volver al inicio</span>
+            <span class="close-btn" onclick="closeModals()">← Volver</span>
         </div>
     </div>
 
     <script>
-        function openOrganizador() { 
-            document.getElementById('modal-organizador').style.display = 'flex'; 
-        }
-        function openBuscar() { 
-            document.getElementById('modal-buscar').style.display = 'flex'; 
-        }
-        function closeModals() {
-            document.getElementById('modal-organizador').style.display = 'none';
-            document.getElementById('modal-buscar').style.display = 'none';
+        let isLoggedIn = false;
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.style.opacity = '0';
+                setTimeout(() => { loader.style.visibility = 'hidden'; document.body.style.overflow = 'auto'; }, 1000);
+            }, 2000);
+        });
+
+        function openLogin() { document.getElementById('modal-login').style.display = 'flex'; }
+
+        function processLogin() {
+            isLoggedIn = true;
+            const email = document.getElementById('userEmail').value;
+            alert("Acceso concedido");
+            closeModals();
+            if(email === 'hugo@mantra.com') window.location.href = 'hugo-dashboard.html';
         }
 
-        // Cerrar al hacer clic fuera del cuadro blanco
-        window.onclick = function(event) {
-            if (event.target.className === 'modal-overlay') {
-                closeModals();
+        function checkAccess(tipo) {
+            const modalId = tipo === 'organizador' ? 'modal-organizador' : 'modal-buscar';
+            document.getElementById(modalId).style.display = 'flex';
+            
+            if (isLoggedIn) {
+                const lockId = tipo === 'organizador' ? 'lock-org' : 'lock-bus';
+                const contentId = tipo === 'organizador' ? 'content-org' : 'content-bus';
+                document.getElementById(lockId).style.display = 'none';
+                document.getElementById(contentId).style.opacity = '1';
+                document.getElementById(contentId).style.pointerEvents = 'auto';
             }
+        }
+
+        function closeModals() {
+            document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none');
         }
     </script>
 </body>
