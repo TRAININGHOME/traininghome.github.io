@@ -156,4 +156,156 @@
     </section>
 
 </body>
+    <style>
+    /* Estilos para los Formularios (Modales) */
+    .modal-overlay {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        display: none; /* Se activa con JS */
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+        backdrop-filter: blur(15px);
+    }
+
+    .form-card {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 40px;
+        border-radius: 24px;
+        border: 1px solid rgba(0, 210, 255, 0.3);
+        width: 100%;
+        max-width: 450px;
+        animation: fadeInUp 0.5s ease;
+    }
+
+    .form-card h2 {
+        color: var(--primary);
+        margin-bottom: 10px;
+    }
+
+    .form-card p {
+        color: var(--text-dim);
+        margin-bottom: 25px;
+        font-size: 0.9rem;
+    }
+
+    .input-group {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .input-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 0.85rem;
+        color: var(--primary);
+    }
+
+    .input-group input, .input-group select, .input-group textarea {
+        width: 100%;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: white;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    .input-group input:focus {
+        border-color: var(--primary);
+    }
+
+    .close-btn {
+        margin-top: 15px;
+        color: var(--text-dim);
+        cursor: pointer;
+        display: block;
+        font-size: 0.8rem;
+    }
+</style>
+
+<div id="modal-organizador" class="modal-overlay">
+    <div class="form-card">
+        <h2>Panel de Organizador</h2>
+        <p>Registra tu evento en una de las sedes de Hugo Isac.</p>
+        
+        <div class="input-group">
+            <label>Nombre del Evento</label>
+            <input type="text" placeholder="Ej. Festival de Jazz Verano">
+        </div>
+
+        <div class="input-group">
+            <label>Sede Solicitada</label>
+            <select>
+                <option>Sede Roma (Cap. 300)</option>
+                <option>Sede Condesa (Cap. 500)</option>
+                <option>Sede Polanco (Cap. 250)</option>
+                <option>Sede Centro (Cap. 800)</option>
+                <option>Sede Juárez (Cap. 400)</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>Fecha del Evento</label>
+            <input type="date">
+        </div>
+
+        <button class="btn-main organizer" style="width: 100%; border:none; cursor:pointer;">
+            Solicitar Reserva de Sede
+        </button>
+        
+        <span class="close-btn" onclick="closeModals()">← Volver al inicio</span>
+    </div>
+</div>
+
+<div id="modal-buscar" class="modal-overlay">
+    <div class="form-card">
+        <h2>Explorar Experiencias</h2>
+        <p>Encuentra los mejores eventos en las sedes MANTRA.</p>
+        
+        <div class="input-group">
+            <label>¿Qué buscas hoy?</label>
+            <input type="text" placeholder="Música, Arte, Gastronomía...">
+        </div>
+
+        <div class="input-group">
+            <label>Filtrar por Zona (Sede)</label>
+            <select>
+                <option>Todas las sedes</option>
+                <option>Roma / Condesa</option>
+                <option>Polanco</option>
+                <option>Centro Histórico</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>Rango de Edad</label>
+            <select>
+                <option>Para toda la familia</option>
+                <option>Mayores de 18 años</option>
+            </select>
+        </div>
+
+        <button class="btn-main guest" style="width: 100%; border:none; background:transparent; cursor:pointer;">
+            Ver Cartelera Disponible
+        </button>
+        
+        <span class="close-btn" onclick="closeModals()">← Volver al inicio</span>
+    </div>
+</div>
+
+<script>
+    // Lógica sencilla para la exposición
+    function openOrganizador() { document.getElementById('modal-organizador').style.display = 'flex'; }
+    function openBuscar() { document.getElementById('modal-buscar').style.display = 'flex'; }
+    function closeModals() {
+        document.getElementById('modal-organizador').style.display = 'none';
+        document.getElementById('modal-buscar').style.display = 'none';
+    }
+
+    // Vincula tus botones principales con estas funciones
+    // Ejemplo: <a href="javascript:void(0)" onclick="openOrganizador()" class="btn-main organizer">...</a>
+</script>
 </html>
