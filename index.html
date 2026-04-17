@@ -3,212 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MANTRA - Prototipo Uno | ESCOM IPN</title>
+    <title>MANTRA | Gestión Inteligente de Sedes</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
-        /* Estilos Globales y Reset */
         :root {
-            --primary: #00d2ff; /* Celeste Neón */
-            --secondary: #2a2a40; /* Fondo Tarjetas */
-            --background: #1e1e2f; /* Fondo Principal */
-            --text: #ffffff;
-            --text-muted: #8b9bb4;
+            --primary: #00d2ff; 
+            --accent: #7000ff;
+            --bg-dark: #0a0a0c;
+            --glass: rgba(255, 255, 255, 0.05);
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             margin: 0;
-            padding: 0;
-            background-color: var(--background);
-            color: var(--text);
-            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        a { text-decoration: none; transition: 0.3s; }
-
-        /* Contenedor Principal */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        /* Animación de entrada */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Hero Section (Cabecera Principal) */
+        /* Navbar Profesional */
+        nav {
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 12, 0.8);
+            backdrop-filter: blur(15px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+
+        .logo { font-size: 1.8rem; font-weight: 800; letter-spacing: 2px; color: var(--primary); }
+
+        /* Hero Section Profesional */
         .hero {
             height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            background: linear-gradient(135deg, rgba(30,30,47,0.8) 0%, rgba(42,42,64,0.6) 100%), 
-                        url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1600') no-repeat center center/cover;
-            position: relative;
-        }
-
-        .hero-content {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            padding: 50px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-        }
-
-        .prototype-tag {
-            display: inline-block;
-            background-color: var(--primary);
-            color: #1e1e2f;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin: 0 0 10px 0;
-            background: linear-gradient(to right, #00d2ff, #3a7bd5);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero h2 {
-            font-size: 1.5rem;
-            font-weight: 300;
-            color: var(--text-muted);
-            margin: 0 0 30px 0;
-        }
-
-        /* Botones */
-        .btn-group {
-            display: flex;
-            gap: 15px;
             justify-content: center;
+            background: radial-gradient(circle at top right, rgba(0, 210, 255, 0.1), transparent),
+                        radial-gradient(circle at bottom left, rgba(112, 0, 255, 0.1), transparent);
+            text-align: center;
         }
 
-        .btn {
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 1rem;
+        .hero-inner {
+            max-width: 900px;
+            animation: fadeInUp 1s ease-out;
+            padding: 0 20px;
         }
 
-        .btn-primary {
-            background-color: var(--primary);
-            color: #1e1e2f;
-        }
-
-        .btn-secondary {
-            border: 2px solid var(--primary);
+        .badge {
+            background: var(--glass);
+            border: 1px solid var(--primary);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             color: var(--primary);
+            margin-bottom: 25px;
+            display: inline-block;
         }
 
-        .btn:hover {
-            opacity: 0.8;
-            transform: translateY(-3px);
+        h1 { font-size: 4.5rem; margin: 0; line-height: 1.1; font-weight: 900; }
+        h1 span { color: var(--primary); }
+
+        p.subtitle { font-size: 1.3rem; color: var(--text-dim); margin: 25px 0 40px; }
+
+        /* Botones de Doble Perfil */
+        .cta-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+
+        .btn-main {
+            padding: 18px 40px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.4s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        /* Sección de Información Técnica */
-        .tech-info {
-            padding: 100px 0;
-            background-color: var(--secondary);
-            margin-top: -50px;
-            border-radius: 50px 50px 0 0;
-            position: relative;
-            z-index: 10;
-        }
+        .organizer { background: var(--primary); color: #000; }
+        .guest { border: 2px solid var(--primary); color: var(--primary); }
 
-        .tech-grid {
+        .btn-main:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(0, 210, 255, 0.3); }
+
+        /* Sección de Sedes */
+        .sedes-preview { padding: 100px 0; text-align: center; }
+        .grid-sedes {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px;
         }
 
-        .tech-card {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        .sede-card {
+            background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 20px;
             transition: 0.3s;
         }
-
-        .tech-card:hover {
-            border-color: var(--primary);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .tech-card h3 {
-            color: var(--primary);
-            margin-top: 0;
-        }
-
-        .tech-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        /* Footer (Pie de Página) */
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
+        .sede-card:hover { background: rgba(255,255,255,0.08); border-color: var(--primary); }
     </style>
 </head>
 <body>
 
+    <nav>
+        <div class="logo">MANTRA</div>
+        <div class="cta-group">
+            <a href="#" style="color: white; text-decoration: none; font-weight: 500;">Iniciar Sesión</a>
+        </div>
+    </nav>
+
     <header class="hero">
-        <div class="hero-content">
-            <span class="prototype-tag">PROTOTIPO UNO</span>
-            <h1>MANTRA</h1>
-            <h2>La plataforma de eventos de la ESCOM. Redefiniendo la experiencia estudiantil.</h2>
+        <div class="hero-inner">
+            <div class="badge">Sistemas de Gestión de Sedes v2.0</div>
+            <h1>Control Total sobre tus <span>5 Sedes</span> en CDMX.</h1>
+            <p class="subtitle">La plataforma exclusiva de Hugo Isac para conectar organizadores de élite con los recintos más vibrantes de la capital.</p>
             
-            <div class="btn-group">
-                <a href="https://mantra-backend-escom.onrender.com" target="_blank" class="btn btn-primary">Ir a la App Dinámica</a>
-                <a href="https://mantra-backend-escom.onrender.com/db-test" target="_blank" class="btn btn-secondary">Probar Conexión DB</a>
+            <div class="cta-group">
+                <a href="#register-organizer" class="btn-main organizer">
+                    <i class="fas fa-calendar-plus"></i> Soy Organizador
+                </a>
+                <a href="#register-guest" class="btn-main guest">
+                    <i class="fas fa-ticket-alt"></i> Buscar Eventos
+                </a>
             </div>
         </div>
     </header>
 
-    <section class="tech-info">
-        <div class="container">
-            <h2 style="text-align: center; color: var(--text);">Ficha Técnica del Prototipo</h2>
-            <p style="text-align: center; color: var(--text-muted);">Esta versión estática demuestra la arquitectura de MANTRA, consumiendo datos en tiempo real de una API dinámica.</p>
-            
-            <div class="tech-grid">
-                <div class="tech-card">
-                    <h3>Frontend Estático</h3>
-                    <p><strong>Plataforma:</strong> GitHub Pages</p>
-                    <p><strong>Tecnologías:</strong> HTML5, CSS3 (Glassmorphism), JavaScript (Fetch API).</p>
-                    <p>Esta es la interfaz de usuario que presenta el proyecto y se conecta al backend dinámico.</p>
-                </div>
-                
-                <div class="tech-card">
-                    <h3>Backend Dinámico</h3>
-                    <p><strong>Plataforma:</strong> Render</p>
-                    <p><strong>Tecnologías:</strong> Node.js, Express, Cors.</p>
-                    <p>Una API RESTful que procesa las peticiones y gestiona la lógica de conexión a la base de datos.</p>
-                </div>
-                
-                <div class="tech-card">
-                    <h3>Base de Datos</h3>
-                    <p><strong>Plataforma:</strong> Neon Tech</p>
-                    <p><strong>Tecnologías:</strong> PostgreSQL Serverless.</p>
-                    <p>Almacenamiento persistente y estructurado para usuarios, eventos y calificaciones.</p>
-                </div>
-            </div>
+    <section class="sedes-preview">
+        <h2>Nuestros Recintos</h2>
+        <div class="grid-sedes">
+            <div class="sede-card"><h3>Sede Roma</h3><p>Capacidad: 300 personas</p></div>
+            <div class="sede-card"><h3>Sede Condesa</h3><p>Capacidad: 500 personas</p></div>
+            <div class="sede-card"><h3>Sede Polanco</h3><p>Capacidad: 250 personas</p></div>
+            <div class="sede-card"><h3>Sede Centro</h3><p>Capacidad: 800 personas</p></div>
+            <div class="sede-card"><h3>Sede Juárez</h3><p>Capacidad: 400 personas</p></div>
         </div>
     </section>
-
-    <footer>
-        <div class="container">
-            <p>MANTRA | Práctica 3.1: "Alojamiento Gratuito" | ESCOM - IPN | Bases de Datos</p>
-            <p>&copy; 2026 Prototipo de Desarrollo</p>
-        </div>
-    </footer>
 
 </body>
 </html>
