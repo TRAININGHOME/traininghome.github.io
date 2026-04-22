@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MANTRA | Gestión Inteligente de Sedes</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        :root {
+            --primary: #00d2ff; 
+            --accent: #7000ff;
+            --bg-dark: #0a0a0c;
+            --card-bg: #16161a;
+            --input-bg: #222228;
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- PANTALLA DE CARGA --- */
+        #loader {
+            position: fixed;
+            width: 100%; height: 100vh;
+            background: #000;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease, visibility 1s;
+        }
+
+        .loader-text {
+            font-size: 3.5rem; font-weight: 900; letter-spacing: 15px;
+            color: var(--primary);
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(0,210,255,0.5); opacity: 0.6; }
+            to { text-shadow: 0 0 30px rgba(0,210,255,1); opacity: 1; }
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            padding: 20px 50px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(10, 10, 12, 0.8);
+            backdrop-filter: blur(15px);
+            position: fixed; width: 100%; z-index: 1000; box-sizing: border-box;
+        }
+
+        .logo { font-size: 1.8rem; font-weight: 800; color: var(--primary); }
+
+        /* --- HERO --- */
+        .hero {
+            height: 85vh; /* Un poco menos de altura para sugerir scroll */
+            display: flex; align-items: center; justify-content: center;
+            background: radial-gradient(circle at top right, rgba(0, 210, 255, 0.1), transparent),
+                        radial-gradient(circle at bottom left, rgba(112, 0, 255, 0.1), transparent);
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero-inner { max-width: 1000px; width: 90%; }
+        h1 { font-size: 4.5rem; margin: 0; font-weight: 900; letter-spacing: -1px; }
+        h1 span { color: var(--primary); }
+        p.subtitle { font-size: 1.4rem; color: var(--text-dim); margin: 20px 0 50px; }
+
+        /* --- BOTONES HORIZONTALES GRANDES --- */
+        .cta-group { 
+            display: flex; 
+            gap: 30px; 
+            justify-content: center; 
+            align-items: center;
+        }
+
+        .btn-main {
+            padding: 22px 50px; /* Más grandes */
+            border-radius: 15px; 
+            font-weight: 800;
+            font-size: 1.1rem;
+            transition: 0.4s; 
+            display: flex; 
+            align-items: center; 
+            gap: 15px;
+            cursor: pointer; 
+            border: none; 
+            font-family: inherit;
+            min-width: 280px;
+            justify-content: center;
+        }
+
+        .organizer { background: var(--primary); color: #000; }
+        .guest { border: 2px solid var(--primary); color: var(--primary); background: transparent; }
+        
+        .btn-main:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 15px 30px rgba(0, 210, 255, 0.2); 
+        }
+
+        /* --- SECCIÓN DE SEDES --- */
+        .sedes-section {
+            padding: 100px 50px;
+            background: linear-gradient(to bottom, transparent, #0f0f12);
+        }
+
+        .sedes-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--primary);
+        }
+
+        .grid-sedes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .sede-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+            text-align: left;
+        }
+
+        .sede-card:hover {
+            border-color: var(--primary);
+            transform: scale(1.02);
+            background: #1c1c22;
+        }
+
+        .sede-card i { color: var(--primary); font-size: 1.5rem; margin-bottom: 15px; }
+        .sede-card h3 { margin: 10px 0; font-size: 1.4rem; }
+        .sede-card p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.5; }
+
+        /* --- MODALES --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none; justify-content: center; align-items: center;
+            z-index: 2000; backdrop-filter: blur(20px);
+        }
+
+        .form-card {
+            background: var(--card-bg);
+            padding: 40px; border-radius: 30px;
+            border: 1px solid var(--primary);
+            width: 90%; max-width: 420px; text-align: center;
+        }
+
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; margin-bottom: 10px; font-size: 0.9rem; color: var(--primary); }
+        
+        .input-group input, .input-group select {
+            width: 100%; padding: 15px; background: var(--input-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px;
+            color: #fff; font-size: 1rem; outline: none;
+        }
+
+        .lock-notice {
+            background: rgba(255, 77, 77, 0.15);
+            color: #ff4d4d; padding: 15px; border-radius: 12px;
+            font-size: 0.9rem; margin-bottom: 25px; border: 1px solid #ff4d4d;
+        }
+
+        .close-btn { margin-top: 25px; color: var(--text-dim); cursor: pointer; display: block; }
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <div class="loader-text">MANTRA</div>
+    </div>
+
+    <nav>
+        <div class="logo">MANTRA</div>
+        <button onclick="openLogin()" class="btn-main guest" style="padding: 12px 25px; font-size: 0.9rem; min-width: auto;">
+            Acceso Privado
+        </button>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-inner">
+            <h1>MANTRA: Gestión de <span>Sedes</span></h1>
+            <p class="subtitle">La infraestructura digital diseñada para el ecosistema de Hugo Isac.</p>
+            
+            <div class="cta-group">
+                <button onclick="checkAccess('organizador')" class="btn-main organizer">
+                    <i class="fas fa-plus-circle"></i> Soy Organizador
+                </button>
+                <button onclick="checkAccess('buscar')" class="btn-main guest">
+                    <i class="fas fa-search"></i> Buscar Eventos
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="sedes-section">
+        <h2>Sedes Disponibles</h2>
+        <div class="grid-sedes">
+            <div class="sede-card">
+                <i class="fas fa-city"></i>
+                <h3>Sede Roma</h3>
+                <p>Ubicación estratégica con capacidad para 300 personas. Ideal para eventos culturales.</p>
+            </div>
+            <div class="sede-card">
+                <i class="fas fa-building"></i>
+                <h3>Sede Condesa</h3>
+                <p>Estilo industrial para 500 invitados. La favorita para festivales de música.</p>
+            </div>
+            <div class="sede-card">
+                <i class="fas fa-gem"></i>
+                <h3>Sede Polanco</h3>
+                <p>Exclusividad para 250 personas. Equipada con tecnología de audio premium.</p>
+            </div>
+            <div class="sede-card">
+                <i class="fas fa-monument"></i>
+                <h3>Sede Centro</h3>
+                <p>Nuestro recinto de mayor escala: 800 personas en el corazón de la CDMX.</p>
+            </div>
+        </div>
+    </section>
+
+    <div id="modal-login" class="modal-overlay">
+        <div class="form-card">
+            <h2>Iniciar Sesión</h2>
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="userEmail" placeholder="admin@mantra.com">
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" placeholder="••••••••">
+            </div>
+            <button class="btn-main organizer" style="width: 100%;" onclick="processLogin()">Conectar</button>
+            <span class="close-btn" onclick="closeModals()">Cerrar</span>
+        </div>
+    </div>
+
+    <div id="modal-organizador" class="modal-overlay">
+        <div class="form-card">
+            <div class="lock-notice" id="lock-org"><i class="fas fa-lock"></i> Requiere Autenticación</div>
+            <h2>Reservar Sede</h2>
+            <div id="content-org" style="opacity: 0.2; pointer-events: none;">
+                <div class="input-group">
+                    <label>Evento</label>
+                    <input type="text">
+                </div>
+                <div class="input-group">
+                    <label>Elegir Sede</label>
+                    <select>
+                        <option>Seleccionar...</option>
+                        <option>Sede Roma</option>
+                        <option>Sede Condesa</option>
+                        <option>Sede Polanco</option>
+                    </select>
+                </div>
+                <button class="btn-main organizer" style="width: 100%;" onclick="window.location.href='organizador-success.html'">Enviar</button>
+            </div>
+            <span class="close-btn" onclick="closeModals()">← Atrás</span>
+        </div>
+    </div>
+
+    <div id="modal-buscar" class="modal-overlay">
+        <div class="form-card">
+            <div class="lock-notice" id="lock-bus"><i class="fas fa-lock"></i> Requiere Autenticación</div>
+            <h2>Cartelera</h2>
+            <div id="content-bus" style="opacity: 0.2; pointer-events: none;">
+                <div class="input-group">
+                    <label>¿Qué buscas?</label>
+                    <input type="text" placeholder="Conciertos...">
+                </div>
+                <button class="btn-main guest" style="width: 100%;" onclick="window.location.href='eventos.html'">Buscar</button>
+            </div>
+            <span class="close-btn" onclick="closeModals()">← Atrás</span>
+        </div>
+    </div>
+
+    <script>
+        let isLoggedIn = false;
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.style.opacity = '0';
+                setTimeout(() => { 
+                    loader.style.visibility = 'hidden'; 
+                    document.body.style.overflow = 'auto'; 
+                }, 1000);
+            }, 2000);
+        });
+
+        function openLogin() { document.getElementById('modal-login').style.display = 'flex'; }
+
+        function processLogin() {
+            isLoggedIn = true;
+            const email = document.getElementById('userEmail').value;
+            alert("Acceso Autorizado");
+            closeModals();
+            if(email === 'hugo@mantra.com') window.location.href = 'hugo-dashboard.html';
+        }
+
+        function checkAccess(tipo) {
+            const modalId = tipo === 'organizador' ? 'modal-organizador' : 'modal-buscar';
+            document.getElementById(modalId).style.display = 'flex';
+            if (isLoggedIn) {
+                const lockId = tipo === 'organizador' ? 'lock-org' : 'lock-bus';
+                const contentId = tipo === 'organizador' ? 'content-org' : 'content-bus';
+                document.getElementById(lockId).style.display = 'none';
+                document.getElementById(contentId).style.opacity = '1';
+                document.getElementById(contentId).style.pointerEvents = 'auto';
+            }
+        }
+
+        function closeModals() {
+            document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none');
+        }
+    </script>
+</body>
+</html>
